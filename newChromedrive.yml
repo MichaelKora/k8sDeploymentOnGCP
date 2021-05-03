@@ -1,0 +1,39 @@
+---
+- hosts: testServer
+  become: true
+  become_user: root
+  tasks:
+  - name: Install Git
+    package:
+     name: git
+     state: present
+
+  - name: Run update
+    apt:
+     update_cache: true
+
+  - name: Install jdk
+    package:
+     name: openjdk-8-jdk
+     state: present
+
+  - name: Install chromium browser
+    package:
+     name: chromium-browser
+     state: present
+  - name: Install chromium driver
+    package:
+     name: chromium-chromedriver
+     state: present
+
+  - name: Run update
+    apt:
+     update_cache: yes
+  - name: install unzip
+    package:
+     name: unzip
+     state: present
+  - name: download chromedriver
+    command: wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
+  - name: unzip chromedriver
+    command: unzip chromedriver_linux64.zip
